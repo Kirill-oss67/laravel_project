@@ -19,3 +19,5 @@ Route::get('/', function () {
 
 Route::get('/my_page', 'MyPlaceController@index'
 );
+
+Route::get('/new_route', 'NewController@new_function');
