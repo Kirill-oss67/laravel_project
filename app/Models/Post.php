@@ -8,4 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class Post extends Model
 {
     use HasFactory;
+    protected $table = 'posts';  // указываем из какой таблизы в базе берем данныеFFFF
+    public $someProperty;
 }
