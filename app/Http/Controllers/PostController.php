@@ -8,8 +8,15 @@ use Illuminate\Http\Request;
 class PostController extends Controller
 {
     public function index()
-    {
-        $post = Post::find(1);
-        dd($post->likes);
+    {   
+        // $post = Post::find(1);
+        // $posts = Post::all();
+        $posts = Post::where('is_published', 0)->first();
+        // foreach($posts as $post){
+        //     dump($post->title);
+        // }
+            dump($posts->title);
+        // dd('end');
+        // dd($posts);
     }
 }
