@@ -21,6 +21,8 @@ class CreatePostsTable extends Migration
             $table->string('image')->nullable();
             $table->unsignedBigInteger('likes')->nullable();
             $table->boolean('is_published')->default(1);
+
+            $table->softDeletes();
         });
     }
 
