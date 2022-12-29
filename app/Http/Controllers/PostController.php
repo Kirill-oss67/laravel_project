@@ -15,7 +15,7 @@ class PostController extends Controller
         // foreach($posts as $post){
         //     dump($post->title);
         // }
-        
+
         // dd('end');
         dd($posts);
     }
@@ -46,7 +46,8 @@ class PostController extends Controller
         }
         dd('created');
     }
-    public function update(){
+    public function update()
+    {
         $post = Post::find(6);
         $post->update([
             'title' => 'updated ',
@@ -59,10 +60,46 @@ class PostController extends Controller
         ]);
         dd('updated');
     }
-    public function delete(){
+    public function delete()
+    {
         $post = Post::withTrashed()->find(4); // ищет с учетом удаленных обьектов
         $post->restore();   // восстанавливает обьект 
         // $post->delete();
         dd('deleted');
     }
+
+    public function first_or_create()
+    {
+        $another_post = [
+            'title' => 'summer ',
+            'content' => 'sun ',
+            'image' => 'image1 ',
+            'likes' => 700,
+            'is_published' => 1,
+        ];
+
+        $post = Post::firstOrCreate([
+            'title' => 'summer'
+        ], $another_post);
+        dump($post->content);
+        dd('the and');
+    }
+    public function update_or_create()
+    {
+        $another_post = [
+            'title' => 'autumn ',
+            'content' => 'a lot of leaves ',
+            'image' => 'image1 ',
+            'likes' => 1000,
+            'is_published' => 1,
+        ];
+
+        $post = Post::updateOrCreate([
+            'title' => 'autumn'
+        ], $another_post);
+        dump($post->content);
+        dd('the and');
+    }
 }
+
+
