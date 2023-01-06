@@ -12,31 +12,62 @@ class PostController extends Controller
         $posts = Post::all(); // поиск всех постов
         return view('post.index', compact('posts'));
     }
+
     public function create()
     {
-       return view('post.create');
+        return view('post.create');
     }
-    public function update()
+
+    public function store()
     {
-        $post = Post::find(6);
-        $post->update([
-            'title' => 'updated ',
-            'content' => 'dump and warm1 ',
-            'image' => 'image1 ',
-            'likes' => 70,
-            'is_published' => 1,
-
-
+        $data = request()->validate([
+            'title' => 'string',
+            'post_content' => 'string',
+            'image' => 'string',
         ]);
-        dd('updated');
+        Post::create($data);
+        return redirect()->route('post.index');
     }
-    public function delete()
+
+    public function show(Post $post)
+    {           // автоматизированный метод Laravel
+        return view('post.show', compact('post'));
+    }
+    // public function show($id){
+    //     $post = Post::findOrFail($id);          // обработка ошибки
+    //     dd($post->title);
+
+    // }
+
+    public function edit(Post $post)
     {
-        $post = Post::withTrashed()->find(4); // ищет с учетом удаленных обьектов
-        $post->restore();   // восстанавливает обьект 
-        // $post->delete();
-        dd('deleted');
+        return view('post.edit', compact('post'));
     }
+
+    public function update(Post $post)
+    {
+        $data = request()->validate([
+            'title' => 'string',
+            'post_content' => 'string',
+            'image' => 'string',
+        ]);
+        $post->update($data);
+        return redirect()->route('post.show', $post->id);
+    }
+
+
+    public function destroy(Post $post){
+        $post->delete();
+        return redirect()->route('post.index');
+    }
+
+    // public function delete()
+    // {
+    //     $post = Post::withTrashed()->find(4); // ищет с учетом удаленных обьектов
+    //     $post->restore();   // восстанавливает обьект 
+    //     // $post->delete();
+    //     dd('deleted');
+    // }
 
     public function first_or_create()
     {
@@ -54,6 +85,7 @@ class PostController extends Controller
         dump($post->content);
         dd('the and');
     }
+
     public function update_or_create()
     {
         $another_post = [

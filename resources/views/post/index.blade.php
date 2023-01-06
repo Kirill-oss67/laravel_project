@@ -1,8 +1,9 @@
 @extends('layouts.main')
 @section('content')
-    <div>@foreach($posts as $post)
-    <div> {{ $post->id}}.{{$post->title }} </div>
-        
+<div>
+    @foreach($posts as $post)
+    <div> {{ $post->id}}. {{$post->title }} </div>
+
     @endforeach
-    </div>
+</div>
 @endsection
