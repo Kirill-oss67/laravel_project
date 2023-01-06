@@ -10,8 +10,8 @@
             <input type="text" name="title" class="form-control" id="title" placeholder="Title" value="{{ $post->title }}">
         </div>
         <div class="form-group">
-            <label for="post_content">Post_content</label>
-            <textarea name="post_content" class="form-control" id="post_content" placeholder="Post_content" >{{ $post->post_content }}</textarea>
+            <label for="post_content">Content</label>
+            <textarea name="content" class="form-control" id="content" placeholder="Content" >{{ $post->Content }}</textarea>
         </div>
         <div class="form-group">
             <label for="image">Image</label>

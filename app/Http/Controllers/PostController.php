@@ -22,7 +22,7 @@ class PostController extends Controller
     {
         $data = request()->validate([
             'title' => 'string',
-            'post_content' => 'string',
+            'content' => 'string',
             'image' => 'string',
         ]);
         Post::create($data);
@@ -48,7 +48,7 @@ class PostController extends Controller
     {
         $data = request()->validate([
             'title' => 'string',
-            'post_content' => 'string',
+            'content' => 'string',
             'image' => 'string',
         ]);
         $post->update($data);
