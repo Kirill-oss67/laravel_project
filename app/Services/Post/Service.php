@@ -8,7 +8,7 @@ class Service
 {
 
     public function store($data)
-    {
+    {   
         $tags = $data['tags'];
         unset($data['tags']);
 
@@ -16,7 +16,7 @@ class Service
         $post->tags()->attach($tags);
     }
 
-    public function update($data,  $post)
+    public function update($post,  $data)
     {
         $tags = $data['tags'];
         unset($data['tags']);

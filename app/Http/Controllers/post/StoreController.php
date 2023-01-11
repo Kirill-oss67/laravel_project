@@ -13,11 +13,10 @@ class StoreController extends BaseController
     public function __invoke(StoreRequest $request)
     {
         $data = $request->validated(); // вот она валидация)) 
-        $tags = $data['tags'];
-        unset($data['tags']);
 
-        $post = Post::create($data);
-        $post->tags()->attach($tags);                   // добавляем данные в таблицу manytomany(короткий способ)
+        
+        $this->service->store($data);
+
 
         return redirect()->route('post.index');
     }
