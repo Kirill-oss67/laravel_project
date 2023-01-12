@@ -32,3 +32,18 @@ Route::group(['namespace' => 'Post'], function () {
     Route::get('/posts/{post}/edit', 'EditController')->name('post.edit');
     Route::patch('/posts/{post}', 'UpdateController')->name('post.update');
 });
+
+Route::group(['namespace' => 'Admin', 'prefix' => 'admin'], function () {
+
+    Route::group(['namespace' => 'Post'], function () {
+        Route::get('/post', 'IndexController')->name('admin.post.index');
+        });
+});
+// Route::get('/admin', 'AdminController')->name('main.index');
+Route::get('/main', 'MainController@index')->name('main.index');
+Route::get('/contacts', 'ContactController@index')->name('contact.index');
+Route::get('/users', 'UserController@index')->name('user.index');
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
