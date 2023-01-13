@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Auth;
 |
 */
 Auth::routes();
-Route::get('/', 'HomeController@index');
+Route::get('/', 'HomeController@index')->name('home.index');
 Route::get('/home', 'HomeController@index');
 
 Route::get(
@@ -33,7 +33,7 @@ Route::group(['namespace' => 'Post'], function () {
     Route::patch('/posts/{post}', 'UpdateController')->name('post.update');
 });
 
-Route::group(['namespace' => 'Admin', 'prefix' => 'admin'], function () {
+Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'middleware' => 'admin'], function () {
 
     Route::group(['namespace' => 'Post'], function () {
         Route::get('/post', 'IndexController')->name('admin.post.index');
