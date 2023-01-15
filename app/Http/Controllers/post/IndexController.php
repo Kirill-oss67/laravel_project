@@ -6,17 +6,25 @@ use App\Http\Controllers\post\BaseController;
 use App\Http\Filters\PostFilter;
 use App\Models\Post;
 use App\Http\Requests\Post\FilterRequest;
-
-
+use App\Http\Resources\Post\PostResource;
 
 class IndexController extends BaseController
 {
     public function __invoke(FilterRequest $request) // однометодный контроллер 
     {
+
         $data = $request->validated();
 
-        $filter = app()->make(PostFilter::class, ['queryParams' => array_filter($data)] );
-        $posts = Post::filter($filter)->paginate(10);
+        $filter = app()->make(PostFilter::class, ['queryParams' => array_filter($data)]);
+        $posts = Post::filter($filter)->paginate(50);   // пагинация
+        return PostResource::collection($posts);
+
+
+
+
+
+
+
         // dd($posts);
 
         // $query = Post::query();
@@ -35,7 +43,6 @@ class IndexController extends BaseController
         // dd($posts);
         // $posts = Post::all();
         // $posts = Post::paginate(10); // such a cool pagination here
-        return view('post.index', compact('posts'));
+        // return view('post.index', compact('posts'));   // раскомитить для получения 'нормальной' html странички от вью
     }
 }
-

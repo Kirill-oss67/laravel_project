@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\post;
 
 use App\Http\Requests\Post\UpdateRequest;
+use App\Http\Resources\Post\PostResource;
 use App\Models\Post;
 
 
@@ -13,8 +14,10 @@ class UpdateController extends BaseController
     {
         $data = $request->validated();
    
-        $this->service->update($post, $data); 
+        $post = $this->service->update($post, $data); 
+
+        return new PostResource($post); // возвращаем не обьект а json массив для фронта
         
-        return redirect()->route('post.show', $post->id);
+        // return redirect()->route('post.show', $post->id);
     }
 }
