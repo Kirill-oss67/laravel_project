@@ -19,7 +19,13 @@ class StoreController extends BaseController
 
 
         $post = $this->service->store($data);
-        return new PostResource($post);
+        // if ($post instanceof Post) {
+        //     return new PostResource($post);
+        // }
+        return $post instanceof Post ? new PostResource($post): $post; // тернарный оператор
+        
+
+
 
         // return redirect()->route('post.index');         // раскомитить для получения 'нормальной' html странички от вью
     }
